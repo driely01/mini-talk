@@ -6,17 +6,24 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:32 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 16:26:46 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/03 21:48:53 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
 
-static void handler(int sig)
+static void	handler(int sig, siginfo_t *info)
 {
-	static char c;
-	static int i;
+	static char	c;
+	static int	i;
+	static int	pid;
 
+	if (info->si_pid != pid)
+	{
+		pid = info->si_pid;
+		c = 0;
+		i = 0;
+	}
 	if (sig == SIGUSR1)
 		c |= 1 << i;
 	i++;
@@ -30,18 +37,17 @@ static void handler(int sig)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	struct sigaction sa;
-	sa.sa_handler = handler;
-	sa.sa_flags = 0;
+	struct sigaction	sa;
+
+	sa.sa_handler = (void *)handler;
+	sa.sa_flags = SA_SIGINFO;
 	ft_printf("server pid: %d\n", getpid());
+	sigaction(SIGUSR2, &sa, NULL);
+	sigaction(SIGUSR1, &sa, NULL);
 	while (1)
 	{
-		sigaction(SIGUSR2, &sa, NULL);
-		sigaction(SIGUSR1, &sa, NULL);
-		// signal(SIGUSR2, &handler);
-		// signal(SIGUSR1, &handler);
 		pause();
 	}
 	return (0);

@@ -6,14 +6,14 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:00:23 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 16:28:44 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/03 21:46:31 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_TALK_H
 # define MINI_TALK_H
 
-#include <libc.h>
+# include <libc.h>
 
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
