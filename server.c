@@ -6,13 +6,13 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:32 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 11:58:24 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:26:46 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libc.h>
+#include "mini_talk.h"
 
-void handler(int sig)
+static void handler(int sig)
 {
 	static char c;
 	static int i;
@@ -32,11 +32,16 @@ void handler(int sig)
 
 int main(void)
 {
-	printf("%d\n", getpid());
+	struct sigaction sa;
+	sa.sa_handler = handler;
+	sa.sa_flags = 0;
+	ft_printf("server pid: %d\n", getpid());
 	while (1)
 	{
-		signal(SIGUSR2, &handler);
-		signal(SIGUSR1, &handler);
+		sigaction(SIGUSR2, &sa, NULL);
+		sigaction(SIGUSR1, &sa, NULL);
+		// signal(SIGUSR2, &handler);
+		// signal(SIGUSR1, &handler);
 		pause();
 	}
 	return (0);

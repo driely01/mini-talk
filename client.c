@@ -6,11 +6,11 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:30 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 12:01:37 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:28:08 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libc.h>
+#include "mini_talk.h"
 
 void	send_sig(char *str, int server_pid)
 {
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 {
 	int	server_pid;
 
-	server_pid = atoi(argv[1]);
+	server_pid = ft_atoi(argv[1]);
 	if (argc == 3)
 		send_sig(argv[2], server_pid);
 	return (0);
