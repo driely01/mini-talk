@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:32 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/07 14:25:53 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/08 17:59:44 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,25 @@
 
 static void	handler(int sig, siginfo_t *info)
 {
-	static char	c;
-	static int	i;
-	static int	pid;
+	static unsigned char	c;
+	static int				i;
+	static int				pid;
 
 	if (info->si_pid != pid)
 	{
 		pid = info->si_pid;
-		c = 0;
-		i = 0;
+		reset(&c, &i);
 	}
 	if (sig == SIGUSR1)
 		c |= 1 << i;
 	i++;
 	if (i == 8)
 	{
-		if (c == 0)
-		{
-			write(1, "\n", 1);
-			usleep(600);
-			kill(pid, SIGUSR1);
-		}
-		write(1, &c, 1);
-		c = 0;
-		i = 0;
+		if (!(c & (1 << 7)))
+			nw_line(pid, c);
+		else
+			printf_unicode(c, info);
+		reset(&c, &i);
 	}
 }
 
@@ -47,12 +42,10 @@ int	main(void)
 
 	sa.sa_handler = (void *)handler;
 	sa.sa_flags = SA_SIGINFO;
-	ft_printf("server pid: %d\n", getpid());
+	ft_printf("The server pid is:\t%d\n", getpid());
 	sigaction(SIGUSR2, &sa, NULL);
 	sigaction(SIGUSR1, &sa, NULL);
 	while (1)
-	{
 		pause();
-	}
 	return (0);
 }

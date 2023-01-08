@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:00:23 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 22:12:22 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/08 17:49:56 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ int		ft_check(const char *fmt, va_list args, int i, int len);
 int		ft_printf(const char *fmt, ...);
 void	send_sig(char *str, int server_pid);
 int		ft_atoi(const char *str);
+void	nw_line(int pid, unsigned char c);
+void	reset(unsigned char *c, int *i);
+int		size_of_bits(unsigned char c);
+void	printf_unicode(unsigned char c, siginfo_t *info);
 
 #endif

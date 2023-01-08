@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:30 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 21:48:33 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:22:04 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ int	main(int argc, char **argv)
 {
 	int	server_pid;
 
-	server_pid = ft_atoi(argv[1]);
 	if (argc == 3)
-		send_sig(argv[2], server_pid);
+	{
+		server_pid = ft_atoi(argv[1]);
+		if (server_pid > 0)
+			send_sig(argv[2], server_pid);
+	}
 	return (0);
 }

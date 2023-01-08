@@ -6,7 +6,7 @@
 #    By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/03 16:29:53 by del-yaag          #+#    #+#              #
-#    Updated: 2023/01/03 22:41:39 by del-yaag         ###   ########.fr        #
+#    Updated: 2023/01/08 17:51:54 by del-yaag         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ S_SRC = server.c ft_printf.c helpers.c
 
 C_SRC_B = bonus/client_bonus.c bonus/ft_atoi.c bonus/ft_printf.c bonus/helpers.c
 
-S_SRC_B = bonus/server_bonus.c bonus/ft_printf.c bonus/helpers.c
+S_SRC_B = bonus/server_bonus.c bonus/ft_printf.c bonus/helpers.c bonus/server_utiles_bonus.c
 
 C_OBJ=$(C_SRC:.c=.o)
 S_OBJ=$(S_SRC:.c=.o)

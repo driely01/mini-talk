@@ -6,23 +6,28 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:32 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/03 21:48:53 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:01:37 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk.h"
 
+static void	reset(unsigned char *c, int *i)
+{
+	*c = 0;
+	*i = 0;
+}
+
 static void	handler(int sig, siginfo_t *info)
 {
-	static char	c;
-	static int	i;
-	static int	pid;
+	static unsigned char	c;
+	static int				i;
+	static int				pid;
 
 	if (info->si_pid != pid)
 	{
 		pid = info->si_pid;
-		c = 0;
-		i = 0;
+		reset(&c, &i);
 	}
 	if (sig == SIGUSR1)
 		c |= 1 << i;
@@ -32,8 +37,7 @@ static void	handler(int sig, siginfo_t *info)
 		if (c == 0)
 			write(1, "\n", 1);
 		write(1, &c, 1);
-		c = 0;
-		i = 0;
+		reset(&c, &i);
 	}
 }
 

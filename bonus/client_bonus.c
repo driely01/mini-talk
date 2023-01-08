@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:30 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/05 17:21:53 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:22:48 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	send_sig(char *str, int server_pid)
 void	handler(int sig)
 {
 	(void)sig;
-	printf("finished");
+	printf("all has been done!");
 	exit(0);
 }
 
@@ -52,13 +52,18 @@ int	main(int argc, char **argv)
 {
 	int	server_pid;
 
-	server_pid = ft_atoi(argv[1]);
 	if (argc == 3)
-		send_sig(argv[2], server_pid);
-	while(1)
 	{
-		signal(SIGUSR1, &handler);
-		pause();
+		server_pid = ft_atoi(argv[1]);
+		if (server_pid > 0)
+		{
+			send_sig(argv[2], server_pid);
+			while (1)
+			{
+				signal(SIGUSR1, &handler);
+				pause();
+			}
+		}
 	}
 	return (0);
 }
