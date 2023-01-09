@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:32 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/08 17:59:44 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:31:35 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ int	main(void)
 	sa.sa_handler = (void *)handler;
 	sa.sa_flags = SA_SIGINFO;
 	ft_printf("The server pid is:\t%d\n", getpid());
-	sigaction(SIGUSR2, &sa, NULL);
-	sigaction(SIGUSR1, &sa, NULL);
+	if (sigaction(SIGUSR2, &sa, NULL) == -1)
+		exit(1);
+	if (sigaction(SIGUSR1, &sa, NULL) == -1)
+		exit(1);
 	while (1)
 		pause();
 	return (0);

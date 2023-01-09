@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 17:47:38 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/08 17:55:43 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:29:48 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	nw_line(int pid, unsigned char c)
 	{
 		write(1, "\n", 1);
 		usleep(600);
-		kill(pid, SIGUSR1);
+		if (kill(pid, SIGUSR1) != 0)
+			exit(1);
 	}
 	write(1, &c, 1);
 }

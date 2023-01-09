@@ -6,39 +6,48 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:30 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/08 18:22:48 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:23:32 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_talk_bonus.h"
+
+static void	fill_zeros(int server_pid)
+{
+	int	j;
+
+	j = -1;
+	while (++j < 8)
+	{
+		if (kill(server_pid, SIGUSR2) != 0)
+			exit(1);
+		usleep(300);
+	}
+}
 
 void	send_sig(char *str, int server_pid)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
-		j = 0;
-		while (j < 8)
+		j = -1;
+		while (++j < 8)
 		{
 			if (str[i] & (1 << j))
-				kill(server_pid, SIGUSR1);
+			{
+				if (kill(server_pid, SIGUSR1) != 0)
+					exit(1);
+			}
 			else
-				kill(server_pid, SIGUSR2);
+				if (kill(server_pid, SIGUSR2) != 0)
+					exit(1);
 			usleep(300);
-			j++;
 		}
-		i++;
 	}
-	j = 0;
-	while (j < 8)
-	{
-		kill(server_pid, SIGUSR2);
-		usleep(300);
-		j++;
-	}
+	fill_zeros(server_pid);
 }
 
 void	handler(int sig)
