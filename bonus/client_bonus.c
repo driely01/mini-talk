@@ -6,7 +6,7 @@
 /*   By: del-yaag <del-yaag@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:51:30 by del-yaag          #+#    #+#             */
-/*   Updated: 2023/01/09 14:23:32 by del-yaag         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:53:44 by del-yaag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	send_sig(char *str, int server_pid)
 void	handler(int sig)
 {
 	(void)sig;
-	printf("all has been done!");
+	ft_printf("all has been done!");
 	exit(0);
 }
 
